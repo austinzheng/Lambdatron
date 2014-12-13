@@ -13,6 +13,8 @@ Lambdatron is an OS X command-line application written in Swift. You will need X
 
 Run the executable either from within Xcode, or directly from the command line. Run with no arguments to start the interactive REPL, or run with the argument `-f <FILENAME>` to have the interpreter run code within a file. When in the REPL, type expressions at the command prompt and press 'Enter'.
 
+Note that running (or profiling) Lambdatron in Xcode will open the REPL up in a new instance of Terminal.app, rather than in Xcode's built-in console. If you wish to debug, after starting the Lambdatron process, go to the Debug menu in Xcode --> Attach to Process, and then choose the process named "Lambdatron" (it should show up under "Likely Targets").
+
 [Grimoire](http://conj.io/) is a high-quality Clojure API reference, and can be used to reference the intended behavior of all included functions and special forms.
 
 Need ideas? Try:
@@ -48,7 +50,6 @@ Need ideas? Try:
 
 Lambdatron has a couple of limitations, due mostly to its work-in-progress status:
 
-- The REPL is fragile. Don't press the arrow keys while inside it, for example, or move the cursor and then try to insert/delete text. Copy-pasting text works fine.
 - The REPL can only take one form at a time.
 - Large parts of the error handling system aren't implemented yet. Asserts will cause the REPL to quit if something goes wrong during evaluation.
 - There currently isn't any namespacing or symbol mangling, so be careful when defining macros (e.g. don't use `& rest` as a vararg).
@@ -87,14 +88,13 @@ Lambdatron has the following features:
 
 - Interpreter core
 - Lexer and parser
-- Special forms: `quote`, `if`, `do`, `def`, `let`, `fn`, `cons`, `first`, `rest`, `defmacro`, `loop`, `recur`
+- Special forms: `quote`, `if`, `do`, `def`, `let`, `fn`, `defmacro`, `loop`, `recur`, `apply`
 - Reader macros: `'` (normal quote), `` ` `` (syntax-quote), `~` (unquote), `~@` (unquote-splice) 
-- Collection built-in functions: `list`, `vector`, `hash-map`, `concat`, `seq`, `get`, `assoc`, `dissoc`
+- Collection built-in functions: `list`, `vector`, `hash-map`, `cons`, `first`, `rest`, `concat`, `seq`, `get`, `assoc`, `dissoc`
 - I/O built-in functions: `print`
 - Type-checking built-in functions: `number?`, `int?`, `float?`, `string?`, `symbol?`, `fn?`, `eval?`, `true?`, `false?`, `list?`, `vector?`, `map?`
 - Arithmetic built-in functions: `+`, `-`, `*`, `/`
 - Comparison built-in functions: `=`, `<`, `>`
-- Other built-in functions: `apply`
 - Standard library functions and macros: `defn`, `not`, `and`, `or`
 
 
@@ -106,7 +106,6 @@ Lambdatron has the following features:
 - Support for keywords
 - Basic namespacing
 - Better error handling than simply crashing the REPL
-- Improved REPL
 - Ability to type in multiple forms at the top level
 - Metacontext - allow consumer to define custom functions visible to the user
 - Performance optimization (once development stabilizes)
